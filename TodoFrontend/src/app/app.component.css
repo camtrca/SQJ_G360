@@ -1,0 +1,340 @@
+/* GLOBAL STYLING */
+body, h1, h2, h3, h4, h5, h6, p, span, button, ul, li, a {
+    font-family: 'Futura', sans-serif;
+    font-style: oblique;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+/* HTML AND BODY STYLING */
+  html, body {
+    height: 100%;
+    overflow: hidden; /* Disable scrolling for the entire page */
+    width: 100%;
+  }
+  
+/* VIDEO BACKGROUND */
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+/* VIDEO STYLING */
+  .video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    background-color: black;
+  }
+  
+/* MAIN CONTAINER */
+  .main-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+/* MAIN TITLE STYLING */
+  .main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+/* GLASS BUTTON STYLING */
+  .glass-button {
+    padding: 15px 40px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+/* BOTTOM BUTTONS STYLING */
+  .bottom-buttons {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+/* Styling for Help and Hourglass Icons */
+  .help-button,
+  .hourglass-button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+ /* Styling for Hourglass Icon */
+  .hourglass-button img {
+    width: 24px; /* Adjust as needed */
+    height: 24px;
+    filter: invert(100%); /* Optional: Makes the icon white */
+    transition: transform 0.3s ease;
+  }
+
+/* Hover Effects */
+  .help-button:hover,
+  .hourglass-button:hover {
+    transform: scale(1.9);
+    color: #fda085;
+  }
+  
+/* Hover Effect for Hourglass Icon */
+  .help-button:hover {
+    transform: scale(1.9);
+    color: #fda085;
+  }
+  .hourglass-button:hover img {
+    filter: invert(85%) sepia(40%) saturate(300%) hue-rotate(10deg); /* Matches hover color */
+  }
+
+  
+/* TODO LIST STYLING */
+  .todo-list {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 100%; /* Ensure the list spans the full container width */
+  }
+  
+  .todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    color: white;
+  }
+  
+  .todo-list .slashed {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  
+  .delete-button {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent with blur */
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+/* HELP WINDOW STYLING */
+  .help-window {
+    position: fixed;
+    top: 0;
+    left: -50%; /* Start off-screen to the left */
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent with blur */
+    backdrop-filter: blur(10px); /* Blurred glass effect */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.5s ease; /* Smooth slide-in effect */
+    z-index: 1000;
+  }
+  
+  .help-window.open {
+    left: 0; /* Slide in when open */
+  }
+  
+
+/* DELETED ITEMS WINDOW STYLING */
+  .deleted-window {
+    position: fixed;
+    top: 0;
+    right: -50%; /* Start off-screen to the right */
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent with blur */
+    backdrop-filter: blur(10px); /* Blurred glass effect */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.5s ease; /* Smooth slide-in effect */
+    z-index: 1000;
+  }
+  
+  .deleted-window.open {
+    right: 0; /* Slide in when open */
+  }
+  
+/* MINI WINDOW CONTENT STYLING */
+  .help-content,
+  .deleted-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    text-align: center;
+    height: 100%; /* Ensures the content spans the full height */
+  }
+  
+  .help-content h2,
+  .deleted-content h2 {
+    font-size: 2rem; /* Increase font size for headings */
+    margin-bottom: 20px;
+    font-weight: 700; /* Bold headings */
+  }
+  
+  .help-content ul li,
+  .deleted-content ul li {
+    margin: 10px 0;
+    font-size: 1.2rem; /* Adjust font size for list items */
+  }
+  
+/* Help Window Styling */
+  .help-window .return-button {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Align to top-left */
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .help-window .return-button:hover {
+    transform: scale(1.1);
+  }
+
+/* Deleted Items Window Back Button Styling */
+  .deleted-window .return-button {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Align to top-right */
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .deleted-window .return-button:hover {
+    transform: scale(1.1);
+  }
+
+/* Task Section */
+  .task-section {
+    margin-bottom: 40px; /* Adds space between the task list and Start button */
+    text-align: center; /* Ensures content is centered */
+  }
+
+/* No Tasks Message */
+  .no-tasks-message {
+    margin-top: 20px; /* Adds space above the message */
+    margin-bottom: 20px; /* Adds some space below the message */
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+/* Start Button Alignment */
+  .glass-button {
+    margin-top: 20px; /* Adds additional space above the button */
+  }
+  
+/* Input Section Container */
+.input-section {
+  display: flex; /* Enables Flexbox */
+  flex-direction: column; /* Aligns items vertically */
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically */
+  gap: 20px; /* Adds spacing between the inputs and buttons */
+  margin-top: 20px; /* Optional: Adjusts vertical positioning */
+}
+
+/* Input Bar Styling */
+.task-input, .task-reminder {
+  width: 80%;
+  max-width: 400px; /* Ensures the inputs don't stretch too wide */
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  margin-bottom: 0; /* Remove individual margins (managed by Flexbox) */
+  transition: border-color 0.3s ease;
+}
+
+.task-input::placeholder, .task-reminder::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.task-input:focus, .task-reminder:focus {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Restore Button */
+.restore-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restore-button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+/* Input Section Back Button */
+.input-section .glass-button {
+  margin: 50px; /* Adds space around the buttons */
+  display: inline-block; /* Allows proper alignment */
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+    

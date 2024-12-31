@@ -1,0 +1,107 @@
+<div class="video-background">
+  <video autoplay loop muted playsinline>
+    <source src="assets/videos/background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<!-- Help Window -->
+<div class="help-window" [class.open]="isHelpWindowOpen" style="text-align: center;">
+  <!-- Acknowledgment -->
+  <p class="acknowledgment" style="margin-top: 10px; font-size: 1rem; color: #555;">
+    Done by Shengqing Jin for Software Developer Assessment Task, submitted on the 1st of January, 2025.
+  </p>
+
+  <div class="help-content">
+    <button class="return-button" (click)="closeHelpWindow()">←</button>
+    <h2>Questions</h2>
+    <div style="font-size: 1rem; line-height: 1.5;">
+      <p>- How to use the app</p>
+      <p>- Click and type and click.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Deleted Items Window -->
+<div class="deleted-window" [class.open]="isDeletedWindowOpen">
+  <div class="deleted-content">
+    <button class="return-button" (click)="closeDeletedWindow()">→</button>
+    <h2>Deleted Items</h2>
+    <ul>
+      <li *ngFor="let item of deletedTodos">
+        {{ item.title }}
+        <button class="restore-button" (click)="restoreTodo(item.id)">Restore</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="main-container">
+  <!-- Title Section -->
+  <h1 class="main-title" *ngIf="!showInputBar" @fadeOut>
+    Todo List
+  </h1>
+
+  <!-- Input Section -->
+  <div *ngIf="showInputBar" @fadeIn class="input-section">
+    <input
+      type="text"
+      class="task-input"
+      placeholder="Enter your task..."
+      [(ngModel)]="newTodoTitle"
+    />
+    <input
+      type="number"
+      class="task-reminder"
+      placeholder="Remind me in __ minutes"
+      [(ngModel)]="reminderTime"
+    />
+    <div class="input-buttons">
+      <button class="glass-button" (click)="addTodo()">Add</button>
+      <button class="glass-button" (click)="goToTitleScreen()">Back</button>
+    </div>
+  </div>
+
+  <!-- Task List Section -->
+  <div class="task-section">
+    <ul class="todo-list" *ngIf="todos.length > 0">
+      <li *ngFor="let todo of todos">
+        <span
+          [class.slashed]="todo.isCompleted"
+          (click)="toggleTodoCompletion(todo)"
+        >
+          {{ todo.title }} (Created: {{ todo.createdAt | date:'short' }})
+        </span>
+        <button
+          *ngIf="todo.isCompleted"
+          class="delete-button"
+          (click)="deleteTodo(todo.id)"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+    <p *ngIf="todos.length === 0" class="no-tasks-message">
+      a moment of tranquillity
+    </p>
+  </div>
+
+  <!-- Start Button -->
+  <button
+    class="glass-button"
+    *ngIf="!showInputBar"
+    (click)="showInputBar = true"
+  >
+    Start
+  </button>
+
+  <!-- Bottom Buttons -->
+  <div class="bottom-buttons">
+    <button class="help-button" (click)="openHelpWindow()">?</button>
+    <button class="hourglass-button" (click)="openDeletedWindow()">
+      <img src="assets/images/hourglass-icon.png" alt="Hourglass Icon" />
+    </button>
+  </div>
+</div>
